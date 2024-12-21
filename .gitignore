@@ -1,0 +1,5 @@
+*.tar.gz
+*.deb
+pkgroot/DEBIAN
+pkgroot/opt/openvscode-server
+pkgroot/usr/share/licenses/openvscode-server.txt
