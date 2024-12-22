@@ -1,5 +1,8 @@
 # openvscode-server-deb
 
+Join the discussion: https://github.com/gitpod-io/openvscode-server/discussions/587
+---
+
 ### Download openvscode-server
 
 ```bash
