@@ -1,3 +1,0 @@
-#!/bin/sh
-
-ln -sv "/opt/openvscode-server/bin/openvscode-server" "/usr/bin/openvscode-server"

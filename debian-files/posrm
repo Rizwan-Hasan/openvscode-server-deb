@@ -1,3 +1,0 @@
-#!/bin/sh
-
-rm -v "/usr/bin/openvscode-server"
