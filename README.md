@@ -1,61 +1,89 @@
-# openvscode-server-deb
+# OpenVSCode-Server-DEB
 
-Join the discussion: https://github.com/gitpod-io/openvscode-server/discussions/587
----
+A utility to build `.deb` packages for OpenVSCode-Server tailored for various architectures.
 
-### Download openvscode-server
+## Overview
+
+This repository provides a simple tool to build Debian (`.deb`) packages of OpenVSCode-Server for specific versions and architectures. It leverages a Go-based script to automate the packaging process.
+
+## Prerequisites
+
+Ensure you have the following installed:
+
+- [Go](https://go.dev/doc/install) (version 1.23.4 or higher recommended)
+- `dpkg`, `curl`, `sed`, `tar`, `rm`, `mkdir`, `chmod` and related tools (typically available on Debian-based systems)
+
+## Usage
+
+### 1. Compile the `build.go` Script
+
+To start, compile the `build.go` script into an executable named `build`:
 
 ```bash
-wget -c "https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.96.0/openvscode-server-v1.96.0-linux-arm64.tar.gz"
+go build -o build main.go
 ```
 
-### Extract archive
+### 2. Build the `.deb` Package
 
-```shell
-tar xzvf openvscode-server-v1.96.0-linux-arm64.tar.gz
+Run the `build` executable with the desired version and architecture.
+
+#### For `amd64`:
+
+```bash
+./build --version 1.96.0 --arch amd64
 ```
 
-```shell
-mv -vf openvscode-server-v1.96.0-linux-arm64 ./pkgroot/opt/openvscode-server
+#### For `arm64`:
+
+```bash
+./build --version 1.96.0 --arch arm64
 ```
 
-### Get License
+### 3. Clean Build Artifacts
 
-```shell
-wget -c "https://raw.githubusercontent.com/gitpod-io/openvscode-server/refs/heads/main/LICENSE.txt"
+To remove any generated files and clean up the working directory:
+
+```bash
+./build --clean
 ```
 
-```shell
-mv -vf LICENSE.txt ./pkgroot/usr/share/licenses/openvscode-server.txt
-```
+## Options
 
-### Add DEBIAN folder
+| Option         | Description                                          |
+|----------------|------------------------------------------------------|
+| `--version`    | Specifies the OpenVSCode-Server version to package. |
+| `--arch`       | Sets the target architecture (`amd64`, `arm64`).     |
+| `--clean`      | Cleans up build artifacts.                           |
 
-```shell
-cp -avrf debian-files ./pkgroot/DEBIAN
-```
+## Example Workflow
 
-### Update architecture
+1. Compile the build script:
 
-```shell
-sed -i 's\ARCHITECTURE\amd64\g' ./pkgroot/DEBIAN/control  # For Intel/AMD
-sed -i 's\ARCHITECTURE\arm64\g' ./pkgroot/DEBIAN/control  # For ARM64
-```
+    ```bash
+    go build -o build main.go
+    ```
 
-### Update version
+2. Build the `.deb` package for `amd64`:
 
-```shell
-sed -i 's\VERSION\1.96.0\g' ./pkgroot/DEBIAN/control
-```
+    ```bash
+    ./build --version 1.96.0 --arch amd64
+    ```
 
-### Fix permissions
+3. Clean up the workspace:
 
-```shell
-chmod 755 -R pkgroot
-```
+    ```bash
+    ./build --clean
+    ```
 
-### Build deb
+## License
 
-```shell
-dpkg-deb --build pkgroot openvscode-server-v1.96.0-arm64.deb
-```
+This project is licensed under the [MIT License](LICENSE).
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request if you'd like to contribute to the project.
+
+## Contact
+
+For questions or feedback, feel free to open an issue in this repository. <br />
+Join the discussion: [gitpod-io/openvscode-server#587](https://github.com/gitpod-io/openvscode-server/discussions/587)
