@@ -30,13 +30,13 @@ Run the `build` executable with the desired version and architecture.
 #### For `amd64`:
 
 ```bash
-./build --version 1.96.0 --arch amd64
+./build --version 1.96.4 --arch amd64
 ```
 
 #### For `arm64`:
 
 ```bash
-./build --version 1.96.0 --arch arm64
+./build --version 1.96.4 --arch arm64
 ```
 
 ### 3. Clean Build Artifacts
@@ -66,7 +66,7 @@ To remove any generated files and clean up the working directory:
 2. Build the `.deb` package for `amd64`:
 
     ```bash
-    ./build --version 1.96.0 --arch amd64
+    ./build --version 1.96.4 --arch amd64
     ```
 
 3. Clean up the workspace:
